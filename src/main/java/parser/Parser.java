@@ -1,10 +1,62 @@
 package parser;
 
-import java.util.ArrayList;
-
 public class Parser {
+    private String logs = "logs\n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " \n" +
+            " lods";
+    private static Parser parser;
 
-    public ArrayList<String> getData(){
+    private Parser(){
+
+    }
+
+    public static Parser getParser() {
+        if(parser == null){
+            parser = new Parser();
+        }
+        return parser;
+    }
+
+    public String getData(){
         /*
 
         Scanner scanner = new Scanner(System.in);
@@ -28,6 +80,6 @@ public class Parser {
         }
 
          */
-        return null;
+        return logs;
     }
 }
