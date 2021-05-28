@@ -1,5 +1,7 @@
 package parser;
 
+import arduino.Arduino;
+
 public class Parser {
     private String logs = "logs\n" +
             " \n" +
@@ -46,7 +48,7 @@ public class Parser {
     private static Parser parser;
 
     private Parser(){
-
+        Arduino arduino = new Arduino("COM52", 9600);
     }
 
     public static Parser getParser() {
