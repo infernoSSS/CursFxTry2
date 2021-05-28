@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import parser.Parser;
 
 import java.net.URL;
@@ -21,12 +22,21 @@ public class Controller {
     private ScrollPane scrollPane;
 
     @FXML
+    private TextField comPortName;
+
+    @FXML
     private Button getLogsButton;
 
     @FXML
     void initialize() {
             getLogsButton.setOnAction(event -> {
-                scrollPane.setContent(new Label(Parser.getParser().getData()));
+                System.out.println(comPortName.getText());
+                boolean portValid = Parser.getParser().setCOMPort(comPortName.getText());
+                if(portValid) {
+                    scrollPane.setContent(new Label(Parser.getParser().getData()));
+                }else {
+                    scrollPane.setContent(new Label("invalid port name"));
+                }
             });
     }
 }

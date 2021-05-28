@@ -1,54 +1,22 @@
 package parser;
 
-import arduino.Arduino;
-
 public class Parser {
-    private String logs = "logs\n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " \n" +
-            " lods";
+    private String logs = "logs";
     private static Parser parser;
+    private MyArduino arduino = null;
 
     private Parser(){
-        Arduino arduino = new Arduino("COM52", 9600);
+
+    }
+
+    public boolean setCOMPort(String comPort){
+        try {
+            arduino.setPortDescription(comPort);
+            arduino.setBaudRate(9600);
+        }catch(Exception e){
+            return false;
+        }
+        return true;
     }
 
     public static Parser getParser() {
@@ -59,29 +27,18 @@ public class Parser {
     }
 
     public String getData(){
-        /*
+        // COM52
+        // /dev/ttyACM0
+        //arduino = new MyArduino("/dev/ttyACM0", 9600);
+        StringBuilder bld = new StringBuilder();
 
-        Scanner scanner = new Scanner(System.in);
-        Arduino arduino = new Arduino("COM52", 9600);
+        System.out.println("Соединение установлено: " + arduino.openConnection());
 
-        boolean connected = arduino.openConnection();
-        System.out.println("Соединение установлено: " + connected);
-
-        arduino.serialWrite("Some request");
-        String ans = arduino.serialRead(1);
-        if (ans != "1") return null;
-
-        String data = arduino.serialRead();
-
-        String[] result = data.split("\n");
-
-        // String[] to ArrayList<String>
+        arduino.serialWrite('5');
+        bld.append(arduino.serialRead(0));
 
         arduino.closeConnection();
 
-        }
-
-         */
-        return logs;
+        return bld.toString();
     }
 }
