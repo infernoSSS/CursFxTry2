@@ -16,7 +16,7 @@ public class Launcher extends Application {
         URL xmlURL = getClass().getResource("/sample.fxml");
         loader.setLocation(xmlURL);
         Parent root = loader.load();
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("RFID logs viewer");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

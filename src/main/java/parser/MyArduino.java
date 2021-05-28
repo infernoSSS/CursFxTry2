@@ -1,8 +1,11 @@
 package parser;
 
 import com.fazecast.jSerialComm.SerialPort;
+import sun.security.util.IOUtils;
 
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Scanner;
 
 
@@ -85,12 +88,23 @@ public class MyArduino {
         try {
             while (true) {
                 if (!(count <= limit)) break;
-                out.append(in.next()).append("\n");
+                //if (!in.hasNext()) break;
+                out.append(
+                        in.next()
+                ).append("\n");
                 count++;
             }
         } catch (Exception e) {}
         in.close();
         return out.toString();
+    }
+
+    public String serialRead2(int limit){
+        //in case of unlimited incoming data, set a limit for number of readings
+        comPort.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
+        StringBuilder out= new StringBuilder();
+        int count=0;
+        return comPort.getInputStream().toString();
     }
 
     public void serialWrite(String s){

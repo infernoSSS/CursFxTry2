@@ -30,14 +30,18 @@ public class Controller {
     @FXML
     void initialize() {
             getLogsButton.setOnAction(event -> {
-                System.out.println(comPortName.getText());
+                //System.out.println(comPortName.getText());
                 boolean portValid = Parser.getParser().setCOMPort(comPortName.getText());
                 if(portValid) {
-                    scrollPane.setContent(new Label(Parser.getParser().getData()));
+                    try {
+                        scrollPane.setContent(new Label(Parser.getParser().getData()));
+                        Thread.sleep(1000);
+                    } catch (Exception e) {}
                 }else {
                     scrollPane.setContent(new Label("invalid port name"));
                 }
             });
+
+        //System.out.println("portvalid");
     }
 }
-

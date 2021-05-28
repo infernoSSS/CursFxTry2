@@ -6,10 +6,10 @@ import java.util.stream.Collectors;
 
 public class Parser {
     private static Parser parser;
-    private MyArduino arduino;
+    private MyArduino arduino = new MyArduino();
 
     public Parser(){
-        arduino = new MyArduino();
+        //arduino = new MyArduino();
     }
 
     public boolean setCOMPort(String comPort){
@@ -31,16 +31,17 @@ public class Parser {
         return parser;
     }
 
-    public String getData() {
+    public String getData() throws InterruptedException {
         // /dev/ttyACM0
-        //System.out.println("Соединение установлено: " + arduino.openConnection());
-        if (!arduino.openConnection()) return null;
+        // System.out.println("Соединение установлено: " + arduino.openConnection());
+        if (!arduino.openConnection()) return "No connection";
 
         arduino.serialWrite('1');
         String result = arduino.serialRead(0);
+
         StringBuffer buffer = new StringBuffer();
 
-        //System.out.println(Arrays.toString(result.replace(".", " ").split(" ")));
+        System.out.println(Arrays.toString(result.replace(".", " ").split(" ")));
         List<String> list = Arrays.stream(result.replace(".", " ").split(" ")).filter(x -> !x.equals("end\n")).map(s -> {
             buffer.append("Card ");
             buffer.append(s.substring(0, 7));
